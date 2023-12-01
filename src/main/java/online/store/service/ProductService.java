@@ -1,5 +1,6 @@
 package online.store.service;
 
+import online.store.entity.Product;
 import online.store.entity.ProductCategory;
 import online.store.repository.ProductCategoryRepository;
 import online.store.repository.ProductRepository;
@@ -25,5 +26,17 @@ public class ProductService {
         return this.productCategoryRepository.findAll().stream()
                 .map(productCategory -> productCategory.getCategory())
                 .collect(Collectors.toList());
+    }
+
+    public List<Product> getDealOfTheDay(int numberOfProducts) {
+        return this.productRepository.findAtMostNumberOfProducts(numberOfProducts);
+    }
+
+    public List<Product> getProductsByCategory(String productCategories) {
+        return this.productRepository.findByCategory(productCategories);
+    }
+
+    public List<Product> getAllProducts() {
+        return this.productRepository.findAll();
     }
 }

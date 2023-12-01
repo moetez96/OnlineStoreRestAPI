@@ -5,6 +5,7 @@ import online.store.service.ProductService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.stream.Collectors;
@@ -25,4 +26,17 @@ public class HomePageController {
                 .collect(Collectors.joining(","));
     }
 
+    @GetMapping(value = "/deals_of_the_day/{number_of_products}",
+            produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ProductsWrapper getDealsOfTheDay(@PathVariable(name = "number_of_products") int numberOfProducts) {
+        return new ProductsWrapper(this.productService.getDealOfTheDay(numberOfProducts));
+    }
+
+    @GetMapping("/products")
+    public ProductsWrapper getProductsForCategory(@RequestParam(name = "category") String category) {
+        if (category != null && !category.isEmpty()) {
+            return new ProductsWrapper(this.productService.getProductsByCategory(category));
+        }
+        return new ProductsWrapper(this.productService.getAllProducts());
+    }
 }
