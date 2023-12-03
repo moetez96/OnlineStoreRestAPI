@@ -19,7 +19,7 @@ Follow these instructions to set up and run the project locally for development 
 - mvn clean install
 - mvn spring-boot:run
  ```
- The application will be accessible at http://localhost:8080.
+ The application will be accessible at http://localhost:8081.
 
 ### Prerequisites
 - Java 11 or higher installed
