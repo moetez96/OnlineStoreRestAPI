@@ -1,6 +1,7 @@
 package online.store.controller;
 
 import online.store.entity.Order;
+import online.store.exception.CreditCardValidationException;
 import online.store.request.CheckoutRequest;
 import online.store.service.CreditCardValidationService;
 import online.store.service.OrdersService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
@@ -35,7 +37,7 @@ public class CheckoutController {
     }
 
     @PostMapping("checkout")
-    public ResponseEntity<String> checkout(CheckoutRequest checkoutRequest) {
+    public ResponseEntity<String> checkout(@RequestBody CheckoutRequest checkoutRequest) {
 
         Set<Order> orders = new HashSet<>(checkoutRequest.getProducts().size());
 
@@ -68,7 +70,7 @@ public class CheckoutController {
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
-    @ExceptionHandler({IllegalStateException.class})
+    @ExceptionHandler({CreditCardValidationException.class})
     public ResponseEntity<String> handleCreditCardError(Exception ex) {
         System.out.println("Request to /checkout path threw an exception " + ex.getMessage());
         return new ResponseEntity<>("Credit card is invalid, please use another form of payment. Reason: "

@@ -1,6 +1,7 @@
 package online.store.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Orders")
@@ -97,5 +98,23 @@ public class Order {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+        return this.quantity == order.quantity && Objects.equals(this.id, order.id) &&
+                Objects.equals(this.firstName, order.firstName) && Objects.equals(this.lastName, order.lastName) &&
+                Objects.equals(this.email, order.email) && Objects.equals(this.shippingAddress, order.shippingAddress) &&
+                Objects.equals(this.creditCard, order.creditCard) && Objects.equals(this.product, order.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.firstName, this.lastName, this.email, this.shippingAddress,
+                this.quantity, this.creditCard, this.product);
     }
 }
