@@ -14,27 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductRepositoryIT {
 
     private static final String ELECTRONICS_CATEGORY = "electronics";
-    private static final Product ELECTRONICS_PRODUCT1 = new Product(
-            "APPLE Laptop",
-            null,
-            null,
-            ELECTRONICS_CATEGORY,
-            5.5f
-    );
-    private static final Product ELECTRONICS_PRODUCT2 = new Product(
-            "Desktop Monitor",
-            null,
-            null,
-            ELECTRONICS_CATEGORY,
-            10.0f
-    );
-    private static final Product ART_PRODUCT = new Product(
-            "Color Makers",
-            "High quality color maker",
-            "makers_640x426.jpeg",
-            "art",
-            14.99f
-    );
+    private static final Product ELECTRONICS_PRODUCT1 = new Product("Apple Laptop",
+            null, null, ELECTRONICS_CATEGORY, 5.5f);
+    private static final Product ELECTRONICS_PRODUCT2 = new Product("Desktop Monitor",
+            null, null, ELECTRONICS_CATEGORY, 10.0f);
+    private static final Product ART_PRODUCT = new Product("Color Makers",
+            "High quality color maker", "makers_640x426.jpeg",
+            "art", 14.99f);
 
     @Autowired
     private ProductRepository productRepository;

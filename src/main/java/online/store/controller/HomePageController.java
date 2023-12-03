@@ -27,13 +27,14 @@ public class HomePageController {
     }
 
     @GetMapping(value = "/deals_of_the_day/{number_of_products}",
-            produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductsWrapper getDealsOfTheDay(@PathVariable(name = "number_of_products") int numberOfProducts) {
         return new ProductsWrapper(this.productService.getDealOfTheDay(numberOfProducts));
     }
 
     @GetMapping("/products")
-    public ProductsWrapper getProductsForCategory(@RequestParam(name = "category") String category) {
+    public ProductsWrapper getProductsForCategory(@RequestParam(name = "category", required = false)
+                                                      String category) {
         if (category != null && !category.isEmpty()) {
             return new ProductsWrapper(this.productService.getProductsByCategory(category));
         }
