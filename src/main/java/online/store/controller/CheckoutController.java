@@ -8,6 +8,7 @@ import online.store.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -65,6 +66,13 @@ public class CheckoutController {
         this.ordersService.placeOrders(orders);
 
         return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @ExceptionHandler({IllegalStateException.class})
+    public ResponseEntity<String> handleCreditCardError(Exception ex) {
+        System.out.println("Request to /checkout path threw an exception " + ex.getMessage());
+        return new ResponseEntity<>("Credit card is invalid, please use another form of payment. Reason: "
+                + ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }

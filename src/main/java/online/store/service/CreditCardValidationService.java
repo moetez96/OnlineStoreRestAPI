@@ -24,13 +24,13 @@ public class CreditCardValidationService {
 
     private void validateNoStolenCreditCard(String creditCardNumber) {
         if (!creditCardNumber.matches(CREDIT_CARD_FORMAT)) {
-            throw new CreditCardValidationException(String.format(creditCardNumber + " is invalid credit card"));
+            throw new CreditCardValidationException(creditCardNumber + " is invalid credit card");
         }
     }
 
     private void validateNumberOfDigits(String creditCardNumber) {
         if (STOLEN_CREDIT_CARDS.contains(creditCardNumber)) {
-            throw new CreditCardValidationException(String.format(creditCardNumber + " is a stolen credit card"));
+            throw new CreditCardValidationException(creditCardNumber + " is a stolen credit card");
         }
     }
 }
