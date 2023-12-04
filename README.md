@@ -14,7 +14,7 @@ OnlineStoreAPI is a simple API developed using Spring Boot (Java 11) with an H2 
 Follow these instructions to set up and run the project locally for development and testing purposes.
 
  ```
-- git clone https://github.com/your-username/OnlineStoreAPI.git
+- git clone https://github.com/moetez96/OnlineStoreRestAPI.git
 - cd OnlineStoreAPI
 - mvn clean install
 - mvn spring-boot:run
